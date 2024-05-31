@@ -1,0 +1,99 @@
+<style>
+  .search-btn{
+    background-color: #fe424d;
+    color:#fff;
+    border-radius: 25px;
+    padding:0 1rem 0 1rem;
+  }
+  .search-btn:hover{
+    background-color: #fe424d;
+    color: #fff;
+  }
+  .search-btn i{
+    display: inline;
+    margin-right: 0.5rem;
+    font-size: 0.5rem;
+  }
+  .search-input{
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+  }
+  .user-i{
+    display: flex;
+    flex-direction: row;
+  }
+  .user-i i{
+    padding-top:10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: larger;
+  }
+  .user-name-i{
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-link-home{
+    margin-right:10px ;
+  }
+  .search-btn i{
+    font-size: medium;
+  }
+  .navbar-brand i{
+    margin-left: 20px;
+  }
+  .dropdown-toggle{
+    margin-right: 100px;
+  }
+  .show{
+    border: none;
+    box-shadow: 2px 2px 2px 2px;
+  }
+</style>
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/listings">  <i class="fa-regular fa-building"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="/listings">Explore</a>
+        </div>
+        <div class="nabar-nav ms-auto">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2 search-input" type="search" placeholder="Search destination">
+            <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+          </form>
+        </div>
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link nav-link-home" href="/listings/new">Wandurlus your home</a>
+          <% if(!currUser){ %>
+            <div class="dropdown-center">
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-circle-user"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <a class="nav-link" href="/signup"><b>sign Up</b></a><hr>
+                <a class="nav-link" href="/login"><b>Log In</b></a>
+              </ul>
+            </div>
+
+          <% } %>
+          <% if(currUser){ %>
+            <div class="dropdown-center">
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-circle-user"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <p style="margin-left:10px ;"><b><%=currUser.username%></b></p>
+                <a class="nav-link" href="/logout"><b>Log Out</b></a>
+              </ul>
+            </div>
+        <% } %>
+        </div>
+          
+          
+        </div>
+      </div>
+    </div>
+  </nav>
