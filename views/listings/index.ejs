@@ -1,0 +1,196 @@
+<% layout("/layouts/boilerplate")%>
+
+<style>
+    #filters{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .filter{
+        text-align: center;
+        margin-right: 2rem;
+        margin-top:2rem;
+        opacity:0.7;
+    }
+    .filter:hover{
+        opacity:1;
+        cursor: pointer;
+    }
+    .filter p{
+        font-size: 0.8rem;
+    }
+    .tax-info{
+        display: none;
+    }
+    .tax-toggle{
+        border: 1px solid black;
+        border-radius: 1rem;
+        height:3rem;
+        padding:1rem;
+        margin-left: 3rem;
+        display: flex;
+        align-items: center;
+    }
+    button {
+    border: none;
+    background-color: rgb(255, 255, 255);
+    }
+
+    button:focus {
+        border: none;
+        outline: none;
+    }
+
+    button:focus{
+        outline:none !important;
+    }
+    /* Default style for filters */
+.filter {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Hide filters after the 7th element */
+@media (min-width: 992px) {
+    .filter:nth-child(n+8) {
+        display: none;
+    }
+}
+
+/* Show more button */
+.show-more {
+    display: none; /* Hidden by default */
+}
+
+/* Show more button on large screens */
+@media (min-width: 992px) {
+    .show-more {
+        display: block;
+        margin-top: 10px;
+    }
+}
+
+</style>
+
+<div id="filters" class="mt-4">
+    <form method="get" action="/listings/search/trending">
+        <div class="filter">
+            <button><div><i class="fa-solid fa-fire"></i></div>
+            Trending</button>
+        </div>
+    </form>
+
+    <form method="get" action="/listings/search/rooms">
+        <div class="filter">
+            <button><div><i class="fa-solid fa-bed"></i></div>
+            Rooms</button>
+        </div>
+    </form>
+
+
+    <div class="filter">
+       <form method="get" action="/listings/search/iconiccities">
+        <button>
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            Iconic cities
+        </button>
+       </form>
+    </div>
+    </form>
+
+    <form method="get" action="/listings/search/mountains">
+        <div class="filter">
+            <button><div><i class="fa-solid fa-mountain-sun"></i></div>
+            Mountains</button>
+        </div>
+    </form>
+
+    <form method="get" action="/listings/search/castels">
+        <div class="filter">
+            <button><div><i class="fa-brands fa-fort-awesome"></i></div>
+            Castels</button>
+        </div>
+    </form>
+
+    <form method="get" action="/listings/search/pool">
+        <div class="filter">
+            <button><div><i class="fa-solid fa-person-swimming"></i></div>
+            Pool</button>
+        </div>
+    </form>
+
+    <form method="get" action="/listings/search/camping">
+        <div class="filter">
+            <button><div><i class="fa-solid fa-campground"></i></div>
+            Camping</button>
+        </div>
+    </form>
+    <form method="get" action="/listings/search/farm">
+        <div class="filter">
+            <button><div><i class="fa-solid fa-cow"></i></div>
+            Farms</button>
+        </div>
+    </form>
+
+    <form method="get" action="/listings/search/arctic">
+        <div class="filter">
+            <button><div><i class="fa-solid fa-snowflake"></i></div>
+            Arctic</button>
+        </div>
+    </form>
+
+    <form method="get" action="/listings/search/riverView">
+        <div class="filter">
+            <button><div><i class="fa-solid fa-person-swimming"></i></div>
+            River View</button>
+        </div>
+    </form>
+
+    <form method="get" action="/listings/search/hillStation">
+        <div class="filter">
+            <button><div><i class="fa-solid fa-campground"></i></div>
+            Hill station</button>
+        </div>
+    </form>
+    <div class="tax-toggle mt-4">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+          </div>
+    </div>
+    
+</div>
+<div class="row row-cols-lg-3 row-cols-md-2 mt-3">
+    <% for(let listing of allListings){ %>
+        <a href="/listings/<%=listing._id%>" class="listing-link">
+            <div class="card col listing-card">
+                <img src="<%=listing.image.url%>" class="card-img-top" alt="image" style="height: 20rem;">
+                <div class="card-img-overlay">abc</div>
+                <div class="card-body">
+                <p class="card-text">
+                    <b><%=listing.title %></b><br>
+                    &#8377;<%=listing.price.toLocaleString("en-IN")%> /Night
+                    <i class="tax-info">&nbsp;+18% GST</i>
+                </p>
+                </div>
+            </div>
+        </a>
+     <% } %>
+    </div>
+    
+
+<script>
+    let taxSwitch=document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click",()=>{
+        let taxInfo=document.getElementsByClassName("tax-info");
+        for(info of taxInfo){
+            if(info.style.display != "inline"){
+                info.style.display = "inline"
+            }
+            else{
+                info.style.display = "none"
+            }
+           
+        }
+    });
+</script>
